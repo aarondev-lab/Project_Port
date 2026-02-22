@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #FDF8F2;
+  --color-black: #1A1A1A;
+  --color-accent: #2C2C2C;
+
+  /* Tipografías */
+  --font-sans: 'Inter', sans-serif;
+  --font-serif: 'Playfair Display', serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-cream text-black font-sans antialiased;
+  }
+
+  p {
+    @apply leading-relaxed;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-serif;
+  }
+}
