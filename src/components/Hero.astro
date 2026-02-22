@@ -1,11 +1,25 @@
 <section class="min-h-[70vh] md:min-h-[80vh] flex items-center justify-center text-center px-4 md:px-6">
-  <div class="max-w-3xl">
+  <div class="max-w-4xl">
     <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
       Hola, soy <span class="text-black/80">Aarón García Sánchez</span>
     </h1>
+    
+    <!-- Línea con texto animado -->
     <p class="text-lg md:text-xl lg:text-2xl mt-4 md:mt-6 text-black/70">
-      21 años · Estudiante de máster en Ciberseguridad · Apasionado por la tecnología
+      21 años · Estudiante de máster en Ciberseguridad · Apasionado por  
+      <span id="dynamic-word" class="font-semibold text-black"></span>
     </p>
+
+    <!-- Badges de skills (opcional, pero los dejamos) -->
+    <div class="flex flex-wrap gap-3 justify-center mt-8">
+      <span class="px-4 py-2 bg-black/5 text-black rounded-full text-sm font-medium">Python</span>
+      <span class="px-4 py-2 bg-black/5 text-black rounded-full text-sm font-medium">JavaScript</span>
+      <span class="px-4 py-2 bg-black/5 text-black rounded-full text-sm font-medium">Symfony</span>
+      <span class="px-4 py-2 bg-black/5 text-black rounded-full text-sm font-medium">MongoDB</span>
+      <span class="px-4 py-2 bg-black/5 text-black rounded-full text-sm font-medium">Tailwind</span>
+      <span class="px-4 py-2 bg-black/5 text-black rounded-full text-sm font-medium">Astro</span>
+    </div>
+
     <div class="mt-8 md:mt-10 flex flex-col sm:flex-row gap-4 justify-center">
       <a href="#projects" class="bg-black text-cream px-6 md:px-8 py-3 rounded-full font-medium hover:bg-black/80 transition">
         Ver proyectos
@@ -14,5 +28,16 @@
         Más sobre mí
       </a>
     </div>
+
+    <!-- Flecha de scroll (opcional) -->
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-black/50">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3" />
+      </svg>
+    </div>
   </div>
 </section>
+<script >
+  import { initTypewriter } from '../scripts/typewriter';
+  initTypewriter('dynamic-word', ["la tecnología", "la ciberseguridad", "el desarrollo web", "el pentesting"]);
+</script>
