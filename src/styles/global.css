@@ -5,7 +5,6 @@
   --color-black: #1A1A1A;
   --color-accent: #2C2C2C;
 
-  /* Tipografías */
   --font-sans: 'Inter', sans-serif;
   --font-serif: 'Playfair Display', serif;
 }
@@ -13,6 +12,7 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    font-size: 16px;
   }
 
   body {
