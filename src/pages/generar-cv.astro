@@ -1,0 +1,532 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Generar CV | Aarón García Sánchez</title>
+        <link rel="stylesheet" href="/src/styles/global.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&family=Playfair+Display:wght@400;700&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body class="bg-cream text-black font-sans">
+        <!-- Header reutilizado (puedes importar el componente si quieres, pero por simplicidad lo copiamos) -->
+        <header
+            class="sticky top-0 z-10 bg-cream/80 backdrop-blur-sm border-b border-black/10 py-4"
+        >
+            <nav
+                class="container mx-auto px-6 flex justify-between items-center"
+            >
+                <a
+                    href="/"
+                    class="text-2xl font-bold tracking-tight hover:opacity-80 transition"
+                    >Aarón García</a
+                >
+                <div class="hidden md:flex space-x-6 text-sm font-medium">
+                    <a href="/#about" class="hover:underline underline-offset-4"
+                        >Sobre mí</a
+                    >
+                    <a href="/#goals" class="hover:underline underline-offset-4"
+                        >Metas</a
+                    >
+                    <a
+                        href="/#projects"
+                        class="hover:underline underline-offset-4">Proyectos</a
+                    >
+                    <a
+                        href="/generar-cv"
+                        class="hover:underline underline-offset-4 font-bold"
+                        >Generar CV</a
+                    >
+                </div>
+                <!-- Botón hamburguesa para móvil (simplificado) -->
+                <button
+                    class="md:hidden p-2 rounded-lg hover:bg-black/5 transition"
+                    id="menu-btn"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        class="w-6 h-6"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                        ></path>
+                    </svg>
+                </button>
+                <div
+                    id="mobile-menu"
+                    class="hidden absolute top-full left-0 w-full bg-cream border-b border-black/10 py-4 px-6 flex flex-col space-y-4 text-sm font-medium md:hidden"
+                >
+                    <a href="/#about">Sobre mí</a>
+                    <a href="/#goals">Metas</a>
+                    <a href="/#projects">Proyectos</a>
+                    <a href="/generar-cv">Generar CV</a>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container mx-auto px-4 py-12 max-w-4xl">
+            <h1 class="text-4xl md:text-5xl font-serif font-bold mb-4">
+                Genera tu CV profesional
+            </h1>
+            <p class="text-lg text-black/70 mb-8">
+                Rellena los datos y elige una plantilla. Obtendrás un PDF listo
+                para descargar.
+            </p>
+
+            <form id="cv-form" class="space-y-8">
+                <!-- Datos personales -->
+                <section
+                    class="bg-white p-6 rounded-xl shadow-sm border border-black/10"
+                >
+                    <h2 class="text-2xl font-serif font-semibold mb-4">
+                        Datos personales
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-1"
+                                >Nombre completo *</label
+                            >
+                            <input
+                                type="text"
+                                name="nombre"
+                                required
+                                class="w-full px-4 py-2 border border-black/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-black/30 bg-cream/50"
+                            />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1"
+                                >Email *</label
+                            >
+                            <input
+                                type="email"
+                                name="email"
+                                required
+                                class="w-full px-4 py-2 border border-black/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-black/30 bg-cream/50"
+                            />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1"
+                                >Teléfono</label
+                            >
+                            <input
+                                type="text"
+                                name="telefono"
+                                class="w-full px-4 py-2 border border-black/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-black/30 bg-cream/50"
+                            />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1"
+                                >Dirección</label
+                            >
+                            <input
+                                type="text"
+                                name="direccion"
+                                class="w-full px-4 py-2 border border-black/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-black/30 bg-cream/50"
+                            />
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium mb-1"
+                                >Perfil profesional</label
+                            >
+                            <textarea
+                                name="perfil"
+                                rows="3"
+                                class="w-full px-4 py-2 border border-black/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-black/30 bg-cream/50"
+                            ></textarea>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Educación (múltiple) -->
+                <section
+                    class="bg-white p-6 rounded-xl shadow-sm border border-black/10"
+                >
+                    <h2 class="text-2xl font-serif font-semibold mb-4">
+                        Educación
+                    </h2>
+                    <p class="text-sm text-black/60 mb-4">
+                        Puedes añadir varios estudios separando los valores con <span
+                            class="font-mono bg-black/5 px-1">|</span
+                        >
+                    </p>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-1"
+                                >Títulos</label
+                            >
+                            <input
+                                type="text"
+                                name="educacion_titulos"
+                                placeholder="Máster en Ciberseguridad|Grado en Informática"
+                                class="w-full px-4 py-2 border border-black/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-black/30 bg-cream/50"
+                            />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1"
+                                >Instituciones</label
+                            >
+                            <input
+                                type="text"
+                                name="educacion_instituciones"
+                                placeholder="Universidad de Málaga|Universidad de Málaga"
+                                class="w-full px-4 py-2 border border-black/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-black/30 bg-cream/50"
+                            />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1"
+                                >Fechas</label
+                            >
+                            <input
+                                type="text"
+                                name="educacion_fechas"
+                                placeholder="2024-2026|2020-2024"
+                                class="w-full px-4 py-2 border border-black/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-black/30 bg-cream/50"
+                            />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1"
+                                >Descripciones (opcional)</label
+                            >
+                            <input
+                                type="text"
+                                name="educacion_descripciones"
+                                placeholder="Especialización en forense|..."
+                                class="w-full px-4 py-2 border border-black/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-black/30 bg-cream/50"
+                            />
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Experiencia -->
+                <section
+                    class="bg-white p-6 rounded-xl shadow-sm border border-black/10"
+                >
+                    <h2 class="text-2xl font-serif font-semibold mb-4">
+                        Experiencia
+                    </h2>
+                    <p class="text-sm text-black/60 mb-4">
+                        Mismo formato: separa con <span
+                            class="font-mono bg-black/5 px-1">|</span
+                        >
+                    </p>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-1"
+                                >Puestos</label
+                            >
+                            <input
+                                type="text"
+                                name="experiencia_puestos"
+                                placeholder="Desarrollador|Asistente"
+                                class="w-full px-4 py-2 border border-black/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-black/30 bg-cream/50"
+                            />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1"
+                                >Empresas</label
+                            >
+                            <input
+                                type="text"
+                                name="experiencia_empresas"
+                                placeholder="Tech Solutions|InfoSys"
+                                class="w-full px-4 py-2 border border-black/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-black/30 bg-cream/50"
+                            />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1"
+                                >Fechas</label
+                            >
+                            <input
+                                type="text"
+                                name="experiencia_fechas"
+                                placeholder="2023-2024|2022-2023"
+                                class="w-full px-4 py-2 border border-black/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-black/30 bg-cream/50"
+                            />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1"
+                                >Descripciones</label
+                            >
+                            <input
+                                type="text"
+                                name="experiencia_descripciones"
+                                placeholder="Desarrollo backend|Soporte técnico"
+                                class="w-full px-4 py-2 border border-black/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-black/30 bg-cream/50"
+                            />
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Habilidades e Idiomas -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <section
+                        class="bg-white p-6 rounded-xl shadow-sm border border-black/10"
+                    >
+                        <h2 class="text-2xl font-serif font-semibold mb-4">
+                            Habilidades
+                        </h2>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-1"
+                                    >Técnicas</label
+                                >
+                                <input
+                                    type="text"
+                                    name="habilidades_hard"
+                                    placeholder="Python|JavaScript|Symfony"
+                                    class="w-full px-4 py-2 border border-black/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-black/30 bg-cream/50"
+                                />
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1"
+                                    >Blandas</label
+                                >
+                                <input
+                                    type="text"
+                                    name="habilidades_soft"
+                                    placeholder="Trabajo en equipo|Comunicación"
+                                    class="w-full px-4 py-2 border border-black/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-black/30 bg-cream/50"
+                                />
+                            </div>
+                        </div>
+                    </section>
+
+                    <section
+                        class="bg-white p-6 rounded-xl shadow-sm border border-black/10"
+                    >
+                        <h2 class="text-2xl font-serif font-semibold mb-4">
+                            Idiomas
+                        </h2>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-1"
+                                    >Idiomas</label
+                                >
+                                <input
+                                    type="text"
+                                    name="idiomas_nombres"
+                                    placeholder="Español|Inglés"
+                                    class="w-full px-4 py-2 border border-black/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-black/30 bg-cream/50"
+                                />
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1"
+                                    >Niveles</label
+                                >
+                                <input
+                                    type="text"
+                                    name="idiomas_niveles"
+                                    placeholder="Nativo|B2"
+                                    class="w-full px-4 py-2 border border-black/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-black/30 bg-cream/50"
+                                />
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Certificaciones y Proyectos (opcional) -->
+                <details
+                    class="bg-white p-6 rounded-xl shadow-sm border border-black/10 open:bg-white"
+                >
+                    <summary
+                        class="text-2xl font-serif font-semibold cursor-pointer select-none"
+                        >Certificaciones y proyectos (opcional)</summary
+                    >
+                    <div class="mt-4 space-y-6">
+                        <div>
+                            <h3 class="font-medium mb-2">Certificaciones</h3>
+                            <div class="space-y-2">
+                                <input
+                                    type="text"
+                                    name="certificaciones_nombres"
+                                    placeholder="Nombres (separados por |)"
+                                    class="w-full px-4 py-2 border border-black/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-black/30 bg-cream/50"
+                                />
+                                <input
+                                    type="text"
+                                    name="certificaciones_entidades"
+                                    placeholder="Entidades (|)"
+                                    class="w-full px-4 py-2 border border-black/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-black/30 bg-cream/50"
+                                />
+                                <input
+                                    type="text"
+                                    name="certificaciones_fechas"
+                                    placeholder="Fechas (|)"
+                                    class="w-full px-4 py-2 border border-black/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-black/30 bg-cream/50"
+                                />
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="font-medium mb-2">Proyectos</h3>
+                            <div class="space-y-2">
+                                <input
+                                    type="text"
+                                    name="proyectos_nombres"
+                                    placeholder="Nombres (|)"
+                                    class="w-full px-4 py-2 border border-black/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-black/30 bg-cream/50"
+                                />
+                                <input
+                                    type="text"
+                                    name="proyectos_descripciones"
+                                    placeholder="Descripciones (|)"
+                                    class="w-full px-4 py-2 border border-black/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-black/30 bg-cream/50"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- Plantilla -->
+                <section
+                    class="bg-white p-6 rounded-xl shadow-sm border border-black/10"
+                >
+                    <h2 class="text-2xl font-serif font-semibold mb-4">
+                        Plantilla
+                    </h2>
+                    <div class="flex flex-wrap gap-4">
+                        <label class="flex items-center gap-2">
+                            <input
+                                type="radio"
+                                name="plantilla"
+                                value="modern"
+                                checked
+                                class="accent-black"
+                            />
+                            <span>Moderna</span>
+                        </label>
+                        <label class="flex items-center gap-2">
+                            <input
+                                type="radio"
+                                name="plantilla"
+                                value="classic"
+                                class="accent-black"
+                            />
+                            <span>Clásica</span>
+                        </label>
+                        <label class="flex items-center gap-2">
+                            <input
+                                type="radio"
+                                name="plantilla"
+                                value="creative"
+                                class="accent-black"
+                            />
+                            <span>Creativa</span>
+                        </label>
+                    </div>
+                </section>
+
+                <!-- Botón de envío -->
+                <div class="text-center">
+                    <button
+                        type="submit"
+                        class="bg-black text-cream px-8 py-4 rounded-full font-medium hover:bg-black/80 transition text-lg shadow-md"
+                    >
+                        Generar CV y descargar
+                    </button>
+                </div>
+            </form>
+
+            <!-- Mensaje de estado -->
+            <div id="status" class="mt-6 text-center"></div>
+        </main>
+
+        <footer
+            class="border-t border-black/10 py-8 px-6 text-center text-black/60 mt-12"
+        >
+            <p>
+                © {new Date().getFullYear()} Aarón García Sánchez. Hecho con Astro
+                y Tailwind.
+            </p>
+        </footer>
+        <script>
+            // Manejo del menú móvil
+            const menuBtn = document.getElementById("menu-btn");
+            const mobileMenu = document.getElementById("mobile-menu");
+
+            if (menuBtn && mobileMenu) {
+                menuBtn.addEventListener("click", () => {
+                    mobileMenu.classList.toggle("hidden");
+                });
+            }
+
+            // Manejo del envío del formulario
+            const form = document.getElementById("cv-form");
+
+            if (form && form instanceof HTMLFormElement) {
+                form.addEventListener("submit", async (e) => {
+                    e.preventDefault();
+                    console.log("Formulario enviado");
+                    const formData = new FormData(form);
+                    const statusDiv = document.getElementById("status");
+
+                    if (statusDiv) {
+                        statusDiv.innerHTML =
+                            "Generando CV, por favor espera...";
+                    }
+
+                    try {
+                        // Asegúrate de que la URL sea la correcta (tu API)
+                        const response = await fetch(
+                            "http://127.0.0.1:8000/generar-cv",
+                            {
+                                method: "POST",
+                                body: formData,
+                            },
+                        );
+
+                        if (!response.ok) {
+                            // Intentamos obtener el mensaje de error de la respuesta
+                            let errorMsg = "Error al generar el CV";
+                            try {
+                                const errorData = await response.json();
+                                if (errorData.detail)
+                                    errorMsg = errorData.detail;
+                            } catch {
+                                // Si no es JSON, usamos el texto de la respuesta
+                                errorMsg = await response.text();
+                            }
+                            throw new Error(errorMsg);
+                        }
+
+                        const blob = await response.blob();
+                        const url = window.URL.createObjectURL(blob);
+                        const a = document.createElement("a");
+                        a.href = url;
+                        a.download = `cv_${formData.get("plantilla") || "modern"}.pdf`;
+                        document.body.appendChild(a);
+                        a.click();
+                        a.remove();
+                        window.URL.revokeObjectURL(url);
+
+                        if (statusDiv) {
+                            statusDiv.innerHTML =
+                                "CV generado correctamente. La descarga debería comenzar.";
+                        }
+                    } catch (error) {
+                        // Aquí manejamos el error correctamente
+                        let mensaje = "Error desconocido";
+                        if (error instanceof Error) {
+                            mensaje = error.message;
+                        } else if (typeof error === "string") {
+                            mensaje = error;
+                        }
+                        if (statusDiv) {
+                            statusDiv.innerHTML = ` Error: ${mensaje}`;
+                        }
+                        console.error(error);
+                    }
+                });
+            }
+        </script>
+    </body>
+</html>
