@@ -1,3 +1,6 @@
+---
+import '../styles/global.css';
+---
 <!doctype html>
 <html lang="es">
     <head>
@@ -13,7 +16,6 @@
         />
     </head>
     <body class="bg-cream text-black font-sans">
-        <!-- Header reutilizado (puedes importar el componente si quieres, pero por simplicidad lo copiamos) -->
         <header
             class="sticky top-0 z-10 bg-cream/80 backdrop-blur-sm border-b border-black/10 py-4"
         >
@@ -42,7 +44,8 @@
                         >Generar CV</a
                     >
                 </div>
-                <!-- Botón hamburguesa para móvil (simplificado) -->
+
+                <!-- Botón hamburguesa para móvil  -->
                 <button
                     class="md:hidden p-2 rounded-lg hover:bg-black/5 transition"
                     id="menu-btn"
@@ -84,7 +87,8 @@
             </p>
 
             <form id="cv-form" class="space-y-8">
-                <!-- Datos personales -->
+
+                <!-- Datos personales para el cv -->
                 <section
                     class="bg-white p-6 rounded-xl shadow-sm border border-black/10"
                 >
@@ -477,7 +481,7 @@
                     try {
                         // Asegúrate de que la URL sea la correcta (tu API)
                         const response = await fetch(
-                            "http://127.0.0.1:8000/generar-cv", 
+                            "http://127.0.0.1:8000/generar-cv",
                             {
                                 method: "POST",
                                 body: formData,
