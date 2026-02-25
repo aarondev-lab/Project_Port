@@ -8,22 +8,25 @@ export interface Props {
 const { class: className, delay = 0 } = Astro.props;
 ---
 
-<section class:list={[className, 'opacity-0']} data-animated data-delay={delay}>
+<section class:list={[className, "opacity-0"]} data-animated data-delay={delay}>
   <slot />
 </section>
 
 <script>
-  const sections = document.querySelectorAll('[data-animated]');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        const target = entry.target as HTMLElement;
-        const delay = target.getAttribute('data-delay') || '0';
-        target.style.animation = `fadeInUp 0.6s ease-out ${delay}ms forwards`;
-        observer.unobserve(target);
-      }
-    });
-  }, { threshold: 0.2 });
+  const sections = document.querySelectorAll("[data-animated]");
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const target = entry.target as HTMLElement;
+          const delay = target.getAttribute("data-delay") || "0";
+          target.style.animation = `fadeInUp 0.6s ease-out ${delay}ms forwards`;
+          observer.unobserve(target);
+        }
+      });
+    },
+    { threshold: 0.2 },
+  );
 
   sections.forEach((section) => observer.observe(section));
 </script>
