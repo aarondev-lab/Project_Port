@@ -1,0 +1,34 @@
+---
+// Este componente maneja los sonidos de la página
+---
+
+<script>
+    function playSound() {
+        const audio = new Audio("/sounds/lego-click.mp3");
+        audio.volume = 0.2;
+        return audio.play(); // devolvemos la promesa
+    }
+
+    function handleClick(event) {
+        const link = event.target.closest?.("a");
+        if (link) {
+            const href = link.getAttribute("href");
+            if (href && href.startsWith("#")) return;
+
+            event.preventDefault(); // Detener navegación
+            playSound();
+            // Navegar después de 2 segundos (tiempo suficiente para que el sonido se escuche completo)
+            setTimeout(() => {
+                window.location.href = link.href;
+            }, 1200);
+        }
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", () => {
+            document.addEventListener("click", handleClick);
+        });
+    } else {
+        document.addEventListener("click", handleClick);
+    }
+</script>
