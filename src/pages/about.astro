@@ -1,0 +1,47 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import AnimatedSection from '../components/AnimatedSection.astro';
+---
+
+<Layout title="Sobre mí">
+  <Header />
+  <main class="container mx-auto px-6 py-12 max-w-4xl">
+    <AnimatedSection>
+      <h1 class="text-4xl md:text-5xl font-serif font-bold mb-8">Sobre mí</h1>
+      <div class="prose prose-lg text-black/80 space-y-4">
+        <p>Málaga, 21 años. Actualmente estudio un máster en Ciberseguridad, con especial interés en forense digital y pentesting. Me apasiona la tecnología en todos sus ámbitos, desde la informática hasta la ingeniería.</p>
+        <p>Aunque mi formación principal es en ciberseguridad, tengo experiencia práctica en desarrollo web. Durante mis prácticas trabajé con Symfony (PHP) y he creado varios proyectos personales usando bases de datos como MongoDB y MariaDB. Disfruto maquetar con Astro, Tailwind y JavaScript.</p>
+        <p>Nivel de inglés B2 (en camino al C1) con experiencia laboral en entornos internacionales. Deportista, sociable y con muchas ganas de aprender.</p>
+      </div>
+    </AnimatedSection>
+
+    <AnimatedSection delay={200}>
+      <h2 class="text-3xl font-serif font-bold mt-12 mb-6">Metas profesionales</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-black/10">
+          <h3 class="text-xl font-semibold mb-3">🎯 Corto plazo</h3>
+          <ul class="space-y-2 text-black/70 list-disc pl-5">
+            <li>Finalizar el máster con un proyecto destacado en forense o pentesting.</li>
+            <li>Obtener la certificación C1 de inglés.</li>
+            <li>Contribuir a proyectos open source relacionados con seguridad.</li>
+            <li>Conseguir mi primera oportunidad profesional en ciberseguridad.</li>
+          </ul>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-black/10">
+          <h3 class="text-xl font-semibold mb-3">🚀 Largo plazo</h3>
+          <ul class="space-y-2 text-black/70 list-disc pl-5">
+            <li>Especializarme como forense digital o pentester en una gran empresa.</li>
+            <li>Combinar conocimientos de desarrollo y seguridad para crear herramientas propias.</li>
+            <li>Seguir aprendiendo y formarme continuamente en nuevas tecnologías.</li>
+            <li>Participar en bug bounties y competiciones de CTF.</li>
+          </ul>
+        </div>
+      </div>
+    </AnimatedSection>
+
+    <div class="mt-12 text-center">
+      <a href="/" class="text-black/60 hover:text-black">← Volver al inicio</a>
+    </div>
+  </main>
+</Layout>

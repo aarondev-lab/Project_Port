@@ -1,29 +1,91 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Header from "../components/Header.astro";
-import Hero from "../components/Hero.astro";
-import About from "../components/About.astro";
-import Goals from "../components/Goals.astro";
-import Projects from "../components/Projects.astro";
-import Footer from "../components/Footer.astro";
-import AnimatedSection from "../components/AnimatedSection.astro";
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import AnimatedSection from '../components/AnimatedSection.astro';
 ---
 
-<Layout title="Inicio - Aarón García Sánchez">
+<Layout title="Inicio">
   <Header />
-  <main>
-    <AnimatedSection>
-      <Hero />
-    </AnimatedSection>
-    <AnimatedSection delay={100}>
-      <About />
-    </AnimatedSection>
-    <AnimatedSection delay={200}>
-      <Goals />
-    </AnimatedSection>
-    <AnimatedSection delay={300}>
-      <Projects />
+  <main class="min-h-[calc(100vh-80px)] flex items-center justify-center px-4">
+    <AnimatedSection class="w-full">
+      <div class="max-w-4xl mx-auto text-center">
+        <!-- Nombre con animación de aparición -->
+        <h1 class="text-5xl md:text-7xl font-bold leading-tight animate-fade-in-up">
+          <span class="text-black/80">Aarón García Sánchez</span>
+        </h1>
+
+        <!-- Texto con efecto typing -->
+        <p class="text-xl md:text-2xl mt-6 text-black/70 h-12" id="typing-text">
+          21 años · Estudiante de máster en Ciberseguridad · Apasionado por <span id="dynamic-word" class="font-semibold text-black"></span>
+        </p>
+
+        <!-- Badges de skills con hover animado -->
+        <div class="flex flex-wrap gap-3 justify-center mt-8 animate-fade-in-up delay-200">
+          {["Python", "JavaScript", "Symfony", "MongoDB", "Tailwind", "Astro"].map(skill => (
+            <span class="px-4 py-2 bg-black/5 text-black rounded-full text-sm font-medium hover:scale-110 hover:bg-black/10 transition-transform duration-200">
+              {skill}
+            </span>
+          ))}
+        </div>
+
+        <!-- Botones con hover efecto -->
+        <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up delay-300">
+          <a href="/projects" class="bg-black text-cream px-8 py-3 rounded-full font-medium hover:bg-black/80 transition hover:scale-105 shadow-lg">
+            Ver proyectos
+          </a>
+          <a href="/about" class="border border-black text-black px-8 py-3 rounded-full font-medium hover:bg-black hover:text-cream transition hover:scale-105 shadow-lg">
+            Más sobre mí
+          </a>
+        </div>
+      </div>
     </AnimatedSection>
   </main>
-  <Footer />
 </Layout>
+
+<script>
+  // Efecto typewriter (el mismo que tenías)
+  const words = ["tecnología", "ciberseguridad", "desarrollo web", "forense digital", "pentesting"];
+  let wordIndex = 0, charIndex = 0, isDeleting = false;
+  const dynamicElement = document.getElementById("dynamic-word");
+
+  function typeEffect() {
+    if (!dynamicElement) return;
+    const currentWord = words[wordIndex];
+    if (isDeleting) {
+      dynamicElement.textContent = currentWord.substring(0, charIndex - 1);
+      charIndex--;
+    } else {
+      dynamicElement.textContent = currentWord.substring(0, charIndex + 1);
+      charIndex++;
+    }
+    if (!isDeleting && charIndex === currentWord.length) {
+      isDeleting = true;
+      setTimeout(typeEffect, 2000);
+      return;
+    }
+    if (isDeleting && charIndex === 0) {
+      isDeleting = false;
+      wordIndex = (wordIndex + 1) % words.length;
+      setTimeout(typeEffect, 500);
+      return;
+    }
+    setTimeout(typeEffect, isDeleting ? 50 : 100);
+  }
+  document.addEventListener("DOMContentLoaded", typeEffect);
+</script>
+
+<style>
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+  .delay-200 {
+    animation-delay: 0.2s;
+  }
+  .delay-300 {
+    animation-delay: 0.4s;
+  }
+</style>

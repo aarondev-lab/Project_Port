@@ -1,0 +1,83 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import AnimatedSection from "../components/AnimatedSection.astro";
+
+const projects = [
+    {
+        title: "Analizador de logs (Python)",
+        description:
+            "Script en Python que analiza logs simulados o reales para detectar patrones de ataque como fuerza bruta y escaneo de puertos. Genera informes HTML profesionales con Bootstrap y los abre automáticamente en el navegador. Además, cuenta con una demo interactiva en Streamlit.",
+        repo: "https://github.com/aarondev-lab/log-analyzer",
+        demo: "https://log-analyzer-haenjfywccekcr5jihuidw.streamlit.app/",
+    },
+    {
+        title: "Generador de CV automático",
+        description:
+            "API con FastAPI y frontend en Astro que genera currículums profesionales en PDF a partir de tus datos personales. Elige entre tres plantillas (moderna, clásica, creativa) y obtén tu CV al instante. Totalmente integrado en este portfolio.",
+        repo: "https://github.com/aarondev-lab/Curriculum-bot",
+        demo: "/generar-cv",
+    },
+    {
+        title: "Banco Digital",
+        description:
+            "Proyecto completo de simulación bancaria con autenticación, transacciones y panel de usuario. Desarrollado con Symfony, MySQL y Tailwind.",
+        repo: "https://github.com/tuusuario/banco-digital",
+    },
+];
+---
+
+<Layout title="Proyectos">
+    <Header />
+    <main class="container mx-auto px-6 py-12 max-w-6xl">
+        <AnimatedSection>
+            <h1 class="text-4xl md:text-5xl font-serif font-bold mb-12">
+                Proyectos
+            </h1>
+            <div
+                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+            >
+                {
+                    projects.map((project) => (
+                        <article class="bg-cream border border-black/10 rounded-xl p-6 shadow-sm hover:shadow-md transition-all hover:-translate-y-1 flex flex-col">
+                            <h3 class="text-2xl font-semibold mb-2">
+                                {project.title}
+                            </h3>
+                            <p class="text-black/70 mb-4 flex-grow">
+                                {project.description}
+                            </p>
+                            <div class="flex flex-wrap gap-3 mt-auto">
+                                {project.repo && (
+                                    <a
+                                        href={project.repo}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        class="inline-flex items-center gap-2 bg-black text-cream px-4 py-2 rounded-full text-sm font-medium hover:bg-black/80 transition"
+                                    >
+                                        GitHub →
+                                    </a>
+                                )}
+                                {project.demo && (
+                                    <a
+                                        href={project.demo}
+                                        class="inline-flex items-center gap-2 border border-black text-black px-4 py-2 rounded-full text-sm font-medium hover:bg-black hover:text-cream transition"
+                                        {...(project.demo.startsWith("http")
+                                            ? {
+                                                  target: "_blank",
+                                                  rel: "noopener noreferrer",
+                                              }
+                                            : {})}
+                                    >
+                                        Demo →
+                                    </a>
+                                )}
+                            </div>
+                        </article>
+                    ))
+                }
+            </div>
+        </AnimatedSection>
+        <div class="mt-12 text-center">
+        </div>
+    </main>
+</Layout>
